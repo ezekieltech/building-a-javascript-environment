@@ -7,3 +7,11 @@ So everyone on our team uses the same critical editor settings, like spaces vers
 2. Some editor, like vscode, requires a plugin which have to be installed
 (check https://editorconfig.org/)
 That's all
+
+#########
+#Package Management
+#########
+Use NPM
+create package.json which npm uses
+npm install
+
