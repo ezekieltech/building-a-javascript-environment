@@ -61,4 +61,33 @@ Quickly host static files
 npm install
 surge
 
+#########
+#Set Up Automation
+#########
+options
+Grunt, Gulp, npm scripts
+
+Declared in packagejson
+leverage ur OS' command line
+Directly use npm package
+Call separate node scripts
+convention-based pre/post hooks
+leverage worlds largest package manager
+why npm scripts?
+Use tools Directly
+No need for separate plugins
+Simpler debudding
+Better bugs
+Esay to learn
+
+
+decalred the scripts in packagejson
+"start": "node buildScripts/srcServer.js"
+"prestart": "node buildScripts/startMessage.js", //prestart will run before start, poststart will run after start
+"localtunnel": "lt --port 3000" //npm run localtunnel
+"share": "npm-run-all --parallel start localtunnel" //run 'start' and 'localtunnel' in parallel
+"share": "npm-run-all --parallel start localtunnel -s" //run 'start' and 'localtunnel' in parallel, '-s' removes extraneous info
+
+packages called from npm scripts do need to be installed globally
+
 
