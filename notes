@@ -31,3 +31,34 @@ Already installed. see the packagejson file
 From root directory, Create a folder 'buildScripts', which houses the srcServer.js file (where webserver is set up) serving a file
 From root directory, create a folder 'src', in it create the file 'index.html'
 
+#########
+#Share Work In Progress
+#########
+Tools:
+localtunnel: easy to share;
+npm install localtunnel -g
+start the app
+lt --port 3000
+lt --port 3000 --subdomain ezekiel //or sub domain of ezekiel
+
+ngrok
+sign up
+install ngrok
+install authtoken
+start app
+./ngrok http 80
+//secutiry
+
+now
+quick depoly node.js to the cloud, hosting persists
+
+npm install
+create start script
+now //no need to keep your files
+
+surge
+Quickly host static files
+npm install
+surge
+
+
