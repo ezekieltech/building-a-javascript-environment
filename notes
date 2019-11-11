@@ -91,3 +91,30 @@ decalred the scripts in packagejson
 packages called from npm scripts do need to be installed globally
 
 
+#########
+# Transpiling
+#########
+Babel
+Transpile the lastest innovations
+Write standardized js
+leveage full ES ecosystem
+use experimental features earlier
+ES6 imports are statically analyzable
+
+Typescripts
+Enhanced autocomplete
+enhanced readerbility
+safer refactory
+additional non-standrd features
+
+Babel
+create a new file in root called .babelrc
+basically this:
+{
+    "presets": [
+        "latest"
+    ]
+}
+
+In packagejson file: "prestart": "babel-node buildScripts/startMessage.js"; see the babel-node
+so ES6 syntax in the startMessage script is transpilled
