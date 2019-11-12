@@ -231,3 +231,8 @@ in src sever, you dont care in build files, to disable: /*eslint-disable no-cons
 
 aliter:
 at the end of a line // eslint-disable-line no-console
+
+"lint:watch": "npm run lint -- --watch"// this says run the lint script, pass the --watch tag as well
+use in start, so that it starts at starup
+
+
