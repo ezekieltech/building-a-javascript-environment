@@ -309,4 +309,6 @@ Run Your test on multiple machine
 Check code coverage
 automate deployment
 
+see the appveyor and travis files in the root directory
+
 
