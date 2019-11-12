@@ -236,3 +236,77 @@ at the end of a line // eslint-disable-line no-console
 use in start, so that it starts at starup
 
 
+#########
+#9 Testing
+#########
+Unit style - single function or module
+integration style - interactions between modules
+UI style - Automate interactions with UI
+
+Testing decisions
+Framework? Mocha, Jasmine, Tape, QUnit, AVA, Jest - MOCHA
+Assertion Library? Some framework comes with one, but not Mocha: CHI
+Helper Library? JSDOM (simulate the browser's DOM), Cheerio (JQuery for the server)
+Where to run tests? Browser (Karma, Testem),Headless Browser(PhantomJS), In-memory DOM(JSDOM)
+Where to put test? Centraized, Alongsize
+When to test? Unit Test(ctrl + s),
+
+in buildscript: create testSetup.js
+//This file isn't transpiled, so must use commonjs and es5
+
+//Register babel to tanspile before our test run.
+require('babel-register')();
+
+//Disable webpack features that Mocha dosent understand
+require.extensions['.css'] = function() {};
+
+in packagejson
+"test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\""
+
+npm run test should fail: No test
+
+now create the test file: in src:
+index.test.js
+import {expect} from 'chai';
+
+describe ('Our first test',() => {
+    it('should pass',() => {
+        expect(true).to.equal(true); //false or true to see fail and pass
+    });
+});
+
+more test:
+describe('index.html',() => {
+    it('should say hello',(done) => { //when running a asynchronous stuffs, use done
+        const index = fs.readFileSync('./src/index.html', 'utf-8');
+        jsdom.env(index,function(err, window){
+            const h1 = window.document.getElementsByTagName('h1')[0];
+            expect(h1.innerHTML).to.equal('Hello World!');
+            done();
+            wondow.close()
+        });
+    });
+});
+
+TEST watch
+In packagejson;
+"test:watch": "npm run test -- --watch"
+
+Continuous integration server: CI Server
+Travis - Linux
+Appveyor - Windows
+
+Does the code work on other machine?
+Forgot to commit new file
+forgot to update packagejson
+commit dosent run crosssplatform
+node version conflict
+bad merge
+didnt run tests
+
+CI Server builds once you make a commit: Run aumated build
+Run Your test on multiple machine
+Check code coverage
+automate deployment
+
+
