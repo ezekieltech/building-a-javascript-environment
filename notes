@@ -160,3 +160,74 @@ the server is configure to use webpack
 **.babelrc is moved to root
 
 to generate source map, we add 'debugger' to where we would like to debug
+
+#########
+#8 Linting
+#########
+Enforce consistency:
+curly braces position
+confirm/ alert
+Trailing commas
+Globals
+eval
+
+Avoid mistakes:
+Extra parathesis
+overwriting function
+assignment in conditionals
+missing default case in switch
+debugger/ console.log
+
+JsLint, JsHint, EsHint
+
+Config. Location: Separate file, or packagejson
+Rules to enable?
+Warnings (can continue development) or errors(breaks the build)? use both?
+Which plugins?
+Use a preset? From scratch or the Recommended (w can tweaked based on feedback)
+
+EsLInt does not watch files. solution? esint-loader or eslint-watch?
+EsLint doesnt use experiemental features; to use, try babel-esint, remeber to use the necessary plugin
+
+
+One place to check
+Univerversal config
+part of contnous integration
+
+Set up EsLint
+Eslint recommendation
+Eslint watch
+
+create .eslintrc.json
+{
+  "root": true, //declare as root
+  "extends": [
+    "eslint:recommended", //use the recommeded rule
+    "plugin:import/errors", //lintin for imports
+    "plugin:import/warnings"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module" //standard
+  },
+  "env": {
+    "browser": true, //for global variables
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+      "no-console": 1 //rules to overwrite; 1 warning, 2 error, 0 means off
+  }
+}
+
+set to run with npm script...
+it can run on its won, but we want to use it with eslint-watch, --color flag colors the warnings/errors
+lint all webpack.config files (dev and pro) in src and buildScripts
+"lint": "esw webpack.config.* src buildScripts --color"
+
+npm run lint -s //run the script; -s flag removes nodejs npm ERR; remember to cd using the right case for the directory
+
+in src sever, you dont care in build files, to disable: /*eslint-disable no-console */ at the top of the file
+
+aliter:
+at the end of a line // eslint-disable-line no-console
