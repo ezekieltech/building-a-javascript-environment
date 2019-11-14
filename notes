@@ -400,5 +400,86 @@ getUsers().then (result => {
 
   }); //remeber to change test, to test that h1 returns Users
 
+  why polifils
+  use polyfill.io //this website gives a script that checks if the browser supports fetch. it povides polyfills if it does not
 
 
+Why mock http?
+Unit testing
+instant response
+keep working when service are down
+rapid prototyping
+avoid inter team bottle neck
+work offline
+
+How to MOck Http?
+Nock
+Static json //same data everytime, dont store change
+Create Development webserver
+-api-mock
+- JSON server
+- JSON SChema faker
+- Browsersyn
+- Express, etc
+
+
+Steps:
+Declare our schema - JSON Schema faker: json-schema.org
+Generate Random Data
+-faker.js, chance.js, randomexp.js
+Serve Data via API
+- JSON Server
+
+in build script folder, create a file: mockDataSchema.js
+bit.ly/ps-mock-data-schema
+export const schema = {
+  "type": "object",
+  "properties": {
+    "users": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "unique": true,
+            "minimum": 1
+          },
+          "firstName": {
+            "type": "string",
+            "faker": "name.firstName"
+          },
+          "lastName": {
+            "type": "string",
+            "faker": "name.lastName"
+          },
+          "email": {
+            "type": "string",
+            "faker": "internet.email"
+          }
+        },
+        "required": ["id", "firstName", "lastName", "email"]
+      }
+    }
+  },
+  "required": ["users"]
+};
+
+file in build script: generateMockData.js
+/*eslint-disable no-console */
+import jsf from 'json-schema-faker';
+import {schema} from './mockDataSchema';
+import fs from "fs";
+import chalk from 'chalk';
+
+const json = JSON.stringify (jsf(schema))
+
+fs.writeFile("./src/api/db.json", json, function (err){
+  if (err){
+    return console.log(chalk.red(err));
+  } else {
+    console.log(chalk.green("Mock Data Generated"));
+  }
+});
