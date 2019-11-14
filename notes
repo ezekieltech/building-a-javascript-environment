@@ -520,4 +520,35 @@ function onError(error){
   console.log(error); //eslint-disable-line no-console
 }
 
+//Handling data manipulation
+//in userApi.js
+add:
+export function deleteUser(id){
+  return del(`users/${id}`);
+}
 
+add:
+function del (url) {
+  const request = new Request(baseUrl + url, {
+    method: "DELETE"
+  });
+  return fetch(request).then(onSuccess, onError);
+}
+
+Handle in index.js:
+   const deleteLinks = global.document.getElementsByClassName ('deleteUser');
+
+    //must use array.from to create a real array from a DOM collection
+    //getElementsByClassname only returns an 'array like' object
+    Array.from (deleteLinks, link => {
+        link.onclick = function (event){
+            const element = event.target;
+            event.preventDefault();
+            deleteUser (element.attributes["data-id"].value);
+            const row = element.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+    });
+});
+
+//remember to import deleteUser
