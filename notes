@@ -552,3 +552,27 @@ Handle in index.js:
 });
 
 //remember to import deleteUser
+
+#########
+#11 Project Development
+#########
+
+Examples of:
+-Directory structure and file naming
+-Framework usgae
+-Testing
+-Mock API
+-Automated deployment
+Codifies Descisions
+Interactive example of working with starter
+
+JS file lives in the .js files
+Dont put it in html file in a script tag <script></script>
+How would you test it? lint it? transpile it? reuse it, import explicit depencies
+
+Avoid dynamically generating Javascript logic. Dynamically gnerate JSON instead
+
+Organise by features, not file types
+
+POJOs, plain old javascript objects that are not framework specific wherever possible.
+easily testable
