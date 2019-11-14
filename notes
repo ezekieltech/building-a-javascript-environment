@@ -312,3 +312,93 @@ automate deployment
 see the appveyor and travis files in the root directory
 
 
+
+#########
+#10 HttpCalls
+#########
+HTTP Call Approaches
+Node - http, request
+Browser - XMLHttpRequest, jquery, Fetch
+Node and Browser - isomorphic-fetch, xhr, SuperAgent, Axios
+
+Why centralize:
+Configure alll calls
+Handle preloader logic
+Handle errors
+Single seam for mocking
+
+Mock:
+Use express to serve the api:
+add a new router:
+app.get('/users', fuction (req, res){
+  res.json([
+    {"id": 1, "firstName": "Matthew", "lastName" = "oye", "email": "ml@gmail.com"},
+    {"id": 2, "firstName": "Cornel", "lastName" = "okon", "email": "co@gmail.com"},
+    {"id": 3, "firstName": "Osita", "lastName" = "Irene", "email": "oi@gmail.com"},
+  ]);
+}); //just hot coding now // test the router
+
+Next:
+Update the browser tocall the api using fetch
+
+in src folder, api folder, create the userApi.js
+import "whatwg-fetch";
+
+export function getUsers (){
+  return get('users');
+}
+
+function get(url){
+  return fetch(url).then(onSuccess, onError);
+}
+
+function onSuccess(response){
+  return response.json();
+};
+
+function onError(error){
+  console.log(error); //eslint-disable-line no-console
+};
+
+//let's call it the browser, head to the index.html
+<table>
+  <thead>
+    <th>&nbsp</th>
+    <th>id</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+  </thead>
+  <tbody id ='users'>
+
+  </tbody>
+
+</table>
+
+//head to index.js to populate the table with api calls
+import {getUsers} from "./api/userApi";
+
+//Populate table of users via API calls.
+getUsers().then (result => {
+
+    let userBody = "";
+
+    result.foEach(user =>{
+        userBody =
+        `
+        <tr>
+            <td> <a href="#" data-id="${user.id}" class="deleteUser">Delete</a></td>
+            <td>${user.id}</td>
+            <td>${user.firstName}</td>
+            <td>${user.lastName}</td>
+            <td>${user.email}</td>
+        </tr>
+        `
+  });
+
+  global.document.getElementsById('users').innerHTML = usersBody
+
+  }); //remeber to change test, to test that h1 returns Users
+
+
+
