@@ -483,3 +483,41 @@ fs.writeFile("./src/api/db.json", json, function (err){
     console.log(chalk.green("Mock Data Generated"));
   }
 });
+
+
+"start-mockapi": "json-server --watch src/api/db.json --port 3001" //try out on cmd
+
+randomise data every time we start the app
+"prestart-mockapi": "npm run generate-mock-data"
+
+then add start-mockapi on the start script
+
+create a file in api, baseUrls.js
+export default functio getBaseUrl (){
+  const inDevelopment = window.location.hostname === 'localhost';
+  return inDevelopment ? 'http://localhost:3001/' : '/';
+}
+
+in userApi file
+import "whatwg-fetch";
+import getBaseUrl from './baseUrl';
+
+const baseUrl = getBaseUrl ();
+
+export function getUsers (){
+  return get('users');
+}
+
+function get(url){
+    return fetch(baseUrl + url).then(onSuccess, onError);
+}
+
+function onSuccess(response){
+  return response.json();
+}
+
+function onError(error){
+  console.log(error); //eslint-disable-line no-console
+}
+
+
