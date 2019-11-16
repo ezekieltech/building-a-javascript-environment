@@ -588,7 +588,7 @@ dead code elimination / tree shaking
 Debug via sourcemap
 
 St Up Minification
-Make a copy:
+Make a copy webpack.config.dev.js to webpack.config.prod.js:
 import webpack from "webpack";
 
 devtool: 'source-map', //see code even if its been minified and bundled
@@ -642,3 +642,20 @@ webpack(webpackConfig).run(err, stats) => {
 copy source server to distServer
 
 and edit
+
+//toggle mock api
+export default function getBaseUrl (){
+  return getQueryStringParameterByName('useMockApi') ? 'http://localhost:3001/' : '/';
+}
+
+function getQueryStringParameterByName (name, url){
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp ("[?&]" + name + "(=([^&#]*)|&|~|$"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+
+  }
+}
