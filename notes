@@ -576,3 +576,60 @@ Organise by features, not file types
 
 POJOs, plain old javascript objects that are not framework specific wherever possible.
 easily testable
+
+#########
+#12 Production bUILD
+#########
+Minification: Speed page loads, reduce bandwidth:
+shortens variable and function names
+removes comments
+removes whitespace and new lines
+dead code elimination / tree shaking
+Debug via sourcemap
+
+St Up Minification
+Make a copy:
+import webpack from webpack;
+
+devtool: 'source-map', //see code even if its been minified and bundled
+path: path.resolve(__dirname, 'dist')
+
+in plugin:
+//Eliminate duplicate packages when generating bundle
+new webpack.optimize.DedupePlugun(),
+//Minify JS
+new webpack.optimize.UglifyPlugin()
+
+a script that will run our webpack config prod build
+in build scripts, create build.js
+/*eslint-disable no-console */
+import webpack from 'webpack';
+import webpackConfig from '../webpack.config.prod';
+import chalk from 'chalk';
+
+process.env.NODE_ENV = 'production'
+
+webpack(webpackConfig).run(err, stats) => {
+  if (err) {//so a fatal error occrued here.
+    console.log(chalk.red(err));
+    return 1;
+  }
+  const jsonStats = stats.toJson();
+
+  if (jsonStats.hasErrors) {
+    return jsonStats.errors.map(error => console.log(chalk.red(error)));
+  }
+
+  if (jsonStats.hasWarnings) {
+    console.log(chalk.yellow('Webpack generated the following warnings: '));
+    jsonStats.warnings.map(warning => console.log(chalk.yelllow(warning)));
+  }
+
+  console.log(`Webpack stats: ${stats}`);
+
+  //if we get this far, the build succeeded.
+  console.log(chalk.green('Your app has been built for production and written to /dist!'))
+
+  return 0;
+}
+
