@@ -5,7 +5,7 @@ import chalk from 'chalk';
 
 process.env.NODE_ENV = 'production'; //declaring that we are running node, Babel uses this
 
-webpack(webpackConfig).run(err, stats) => {
+webpack(webpackConfig).run((err, stats) => {
   if (err) {//so a fatal error occrued here.
     console.log(chalk.red(err));
     return 1;
@@ -27,4 +27,4 @@ webpack(webpackConfig).run(err, stats) => {
   console.log(chalk.green('Your app has been built for production and written to /dist!'))
 
   return 0;
-}
+});
