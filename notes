@@ -589,7 +589,7 @@ Debug via sourcemap
 
 St Up Minification
 Make a copy:
-import webpack from webpack;
+import webpack from "webpack";
 
 devtool: 'source-map', //see code even if its been minified and bundled
 path: path.resolve(__dirname, 'dist')
@@ -607,7 +607,7 @@ import webpack from 'webpack';
 import webpackConfig from '../webpack.config.prod';
 import chalk from 'chalk';
 
-process.env.NODE_ENV = 'production'
+process.env.NODE_ENV = 'production' //declaring that we are running node, Babel uses this
 
 webpack(webpackConfig).run(err, stats) => {
   if (err) {//so a fatal error occrued here.
@@ -633,3 +633,12 @@ webpack(webpackConfig).run(err, stats) => {
   return 0;
 }
 
+
+//to run the final production of the app on the local machine to make sure evrything looks good
+//file called distServer in build scripts
+
+//not for use in real production
+
+copy source server to distServer
+
+and edit
