@@ -707,3 +707,38 @@ new HtmlWebpackPlugin ({
 
 copy settings to the dev part, except the minify attribute
 
+//Bundle Spilitting
+why?
+speead initial page load
+avoid re-downloading all libaries
+
+Bundle splitting with webpack
+//in webpackconfig.prod
+//webpack allows multptiple entry points
+entry: {
+  vendor: path.resolve(__dirname, 'sc/vendor'),
+  main: path.resolve(__dirname, 'src/index')
+}
+
+//put in a plug-in
+//Use CommonChunckPlugin to create a separate bundle
+//of vendor libraries so that they are cached separately
+new webpack.optimize.CommonChunkPlugin ({
+  name: 'vendor' //value of name is the sme as the entry point
+})
+
+//output value also changes
+filename: '[name].js'
+
+create a file vendor.js in src folder
+/* This file contains reference to the vendor libraries we are usng in this project. This is used by webpack in the
+production build only. A separate bundle for vendor code is useful since it's unlikely
+to change as often as the application code. So all the library we reference
+here will be wrtten to vendor.js so they can be chached untile one of them changes
+So basically re-downloading a huge js file anytime a line of
+code changes. Any files that arent referenced here will be bundled  into main.js for the
+production */
+
+/* eslint-disable no-unused-vars */
+import fetch from 'whatwg-fetch';
+
