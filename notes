@@ -723,7 +723,7 @@ entry: {
 //put in a plug-in
 //Use CommonChunckPlugin to create a separate bundle
 //of vendor libraries so that they are cached separately
-new webpack.optimize.CommonChunkPlugin ({
+new webpack.optimize.CommonsChunkPlugin ({
   name: 'vendor' //value of name is the sme as the entry point
 })
 
@@ -741,4 +741,27 @@ production */
 
 /* eslint-disable no-unused-vars */
 import fetch from 'whatwg-fetch';
+
+
+//Cache Busting
+Save HTTP Requests //no request for up to one year
+Force request for the latest update
+
+//Plan
+Hash Bundle filename
+Generate HTML Dynamically
+
+
+//Set Up Cache busting
+//in webpackConfig.prod.js
+
+3 changes:
+import webpackMd5Hash from 'webpack-md5-hash';
+
+add plugin:
+//Hash the files using MD5 so that their names change when the content change
+new WebpackMd5Hash(),
+
+change name:
+filename: '[name].[chunkhash].js'
 
