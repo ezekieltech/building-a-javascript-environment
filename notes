@@ -666,3 +666,44 @@ function getQueryStringParameterByName (name, url){
 "prebuild": "npm-run-all clean-dist test lint",
 "build": "babel-node buildScripts/build.js"
 "postbuild": "babel-node buildScripts/distServer.js"
+
+
+//run seoarate html for production
+//why manipulate HTML for production
+reference bundles automatically
+handle dynamic bundle names
+inject production only resources
+minify html
+
+Referenceing Bundled Assets in Html
+Hardcode
+Manipulate via Node
+html-webpack-plugin
+
+Demo:
+copy html from source to prod
+//import the plugin in webpackConfig prod
+import HtmlWebpackPlugin from 'html-webpack-plugin '
+
+the plugin
+//create html file that includes reference to bundled JS
+new HtmlWebpackPlugin ({
+  template: 'src/index.html',
+  minify: {
+    removeComments: true,
+    collaspseWhitespace: true,
+    removeRedundantAttributes: true,
+    useShortDoctype: true,
+    removeEmptyAttributes: true,
+    removeStyleLinkTypeAttribute: true,
+    keepClosingSlash: true,
+    minifyJs: true,
+    minifyCSS: true,
+    minifyURLs: true
+  },
+  inject: true //so we delete the script tag in html since the scrip would be injected
+
+})
+
+copy settings to the dev part, except the minify attribute
+
