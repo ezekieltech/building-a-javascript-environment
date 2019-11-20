@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from "webpack";
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
+import {trackJsToken} from './trackJs';
 
 export default {
   debug: true,
@@ -45,7 +46,8 @@ export default {
         minifyCSS: true,
         minifyURLs: true
       },
-      inject: true //so we delete the script tag in html since the scrip would be injected
+      inject: true, //so we delete the script tag in html since the scrip would be injected
+      trackJsToken: trackJsToken()
     }),
 
     //Eliminate duplicate packages when generating bundle

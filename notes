@@ -762,6 +762,24 @@ add plugin:
 //Hash the files using MD5 so that their names change when the content change
 new WebpackMd5Hash(),
 
-change name:
-filename: '[name].[chunkhash].js'
+change name:z634-x7r[rrfilename: '[name].[chunkhash].js'
 
+//Error Logging When client has an error
+Use Track JS
+
+//HTML Templates via Embedded JS
+//properties you define in the HtmlWebpackPlugin are available in the index.html
+//using htmlWebpackPlugin.options.varName
+//add as a ppt of htmlWebpackPlugin;
+trackJsToken: '20f316bfce13338aa147535db9e9ea'
+
+//add in the html teplate, and reference it instead of hardcoding the token
+<%if (htmlWebpackPlugin.options.trackJsToken){ %>
+<! -- BEGIN TRACK -->
+
+
+<! -- END TRACK -->
+<% } %>
+
+{ token: '<% htmlWebpackPlugin.options.trackJsToken %>' }
+//the html file can be covertered to ejs file, or you can add a comment at the very top
