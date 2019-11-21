@@ -24,11 +24,3 @@ app.listen(port, function(err){
         open('http://localhost:' + port)
     }
 });
-
-app.get('/users', function (req, res){
-    res.json([
-      {"id": 1, "firstName": "Matthew", "lastName":"oye", "email": "ml@gmail.com"},
-      {"id": 2, "firstName": "Cornel", "lastName":"okon", "email": "co@gmail.com"},
-      {"id": 3, "firstName": "Osita", "lastName":"Irene", "email": "oi@gmail.com"}
-    ]);
-  });
